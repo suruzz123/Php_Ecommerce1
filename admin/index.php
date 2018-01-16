@@ -1,3 +1,5 @@
+<?php session_start();?>
+
 <!doctype html>
 <html lang="en">
 
@@ -90,7 +92,7 @@
                            
                          
                             <li>
-                                <a href="login.php">
+                                <a href="logout.php"> <?php echo $_SESSION['username']?>
                                     <p>Log Out</p>
                                 </a>
                             </li>

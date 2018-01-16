@@ -10,7 +10,28 @@
   	<h2>Login</h2>
   </div>
 	 
-  <form method="post" action="login.php">
+	 
+	 <?php
+session_start();
+$conn = mysqli_connect("localhost","root","","blog");
+	
+$message="";
+if(!empty($_POST["login"])) {
+	$result = mysqli_query($conn,"SELECT * FROM admin WHERE username='" . $_POST["username"] . "' and password = '". $_POST["password"]."'");
+	$row  = mysqli_fetch_array($result);
+	if(is_array($row)) {
+	$_SESSION["id"] = $row['id'];
+	$_SESSION["username"] = $row['username'];
+		header('Location: index.php');
+	}
+	else
+		{
+	$message = "Invalid Username or Password!";
+	}
+}
+?>
+	 
+  <form method="post" action="">
   	
   	<div class="input-group">
   		<label>Username</label>
@@ -21,11 +42,9 @@
   		<input type="password" name="password">
   	</div>
   	<div class="input-group">
-  		<button type="submit" class="btn" name="login_user">Login</button>
+  		<button type="submit" class="btn"  name="login" value="Login" class="form-submit-button">Login</button>
   	</div>
-  	<p>
-  		Not yet a member? <a href="register.php">Sign up</a>
-  	</p>
+ 
   </form>
 </body>
 </html>
